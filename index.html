@@ -1,0 +1,37 @@
+<html>
+	<head>
+	<title>Hangman</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+ 	<script type="text/javascript" src="assets/javascript/game.js"></script>
+ 	</head>
+	<body>
+		<header>
+			<h1>Hangman</h1>
+		</header>
+		<div class="container">
+			<div class="panel img">
+				<h1 id="guessInfo"></h1>
+				<img id="guessImage" alt="Game image" src="assets/images/guess.jpg">
+					
+				</img>
+				<div id="player"></div>
+			</div>
+
+			<div class="panel control">
+				<p class="prompt">Press any Key to Start</p>
+				<p>Wins: <span  class="data" id="winCount"></span></p>
+				<p>Current word:<p><span  class="data" id="currentWord"></span></p></span></p> 
+				<p>Number of guesses <span  class="data" id="guessCount"></span></p>
+				<p>Remaining <p><span  class="data" id="remainingCount"></span></p></p>
+				<p>Letters<p><span  class="data" id="letters"></span></p></p>
+
+			</div>
+
+
+		</div>
+
+	</body>
+
+</html>

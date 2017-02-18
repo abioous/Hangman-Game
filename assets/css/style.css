@@ -1,0 +1,59 @@
+* {
+	color: white;
+}
+
+body {
+		background-color: black;
+}
+
+h1 {
+	font-size: xx-large;
+	font-family: "Times New Roman", Georgia, Serif;
+	display: block;
+	text-align: center;
+	color:lightyellow;
+}
+
+.panel p {
+	padding: 0.2em;
+	font-family: "Times New Roman", Georgia, Serif;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+
+
+.panel {
+	flex:1;
+	text-align:center;
+	padding:1em;
+	margin:1em;
+	border-style: dashed;
+	border-color: lightyellow;
+	border-width: 2px;
+	min-height: 70vh;
+}
+
+#startGame {
+	color: red;
+	font-size: large;
+}
+
+#letters {
+	display: flex;
+	flex-wrap:wrap;
+}
+
+#guessImage {
+	width:60vh;
+}
+
+#letters > * {
+	flex:12%;
+	color: black;
+}
