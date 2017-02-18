@@ -42,12 +42,15 @@ var game = {
 	currentBand:{},
 	bandIndex:-1,
 	currentWord:'',
+	currentWordUniqueLetterCount:0,
 	guessedBandSong:'',
 	guessedBandImageUrl:'',
 	gameImageUrl:'assets/images/guess.jpg',	
 	winCount:0,
+	lossesCount:0,
 	guessCount:0,
 	remainingCount:0,
+
 	letterGuessed:'',
 	letterMissed:'',
 	data:[],
@@ -65,21 +68,22 @@ var game = {
 	start:function(bands) {
 		this.bands = bands;
 		this.clear();
-		this.selectBand();
+		this.setupBand();
 		this.draw();
 	},
 
-	selectBand:function() {
+	setupBand:function() {
 		var bandIndex = parseInt(Math.random()*100) % self.bands.length;
 		//make suere to select another word each time.
 		if(self.bandIndex == bandIndex && self.bands.length > 1) {
-			this.selectBand();
+			this.setupBand();
 			return;
 		}
 		self.bandIndex = bandIndex;
 		this.currentBand = self.bands[bandIndex]; 
 		this.currentWord = this.currentBand["name"].toUpperCase();
-		this.remainingCount = counterUniqueLetters(this.currentWord);
+		this.currentWordUniqueLetterCount = counterUniqueLetters(this.currentWord); 
+		this.remainingCount = this.currentWordUniqueLetterCount + 3;
 	},
 
 
@@ -104,13 +108,20 @@ var game = {
 			this.remainingCount--;
 		} else {
 			this.letterMissed += letter;
+			this.remainingCount--;
 		}
 
-		if(this.remainingCount == 0) {
+
+		if(this.currentWordUniqueLetterCount == this.guessCount) {
 			this.winCount++;
 			this.guessedBandImageUrl = this.currentBand.imageUrl;
 			this.guessedBandSong = this.currentBand.songTitle + ' by ' + this.currentBand.name;
 			this.playSong(this.currentBand.songUrl);
+			this.start(bands);
+		} else if(this.remainingCount == 0) {
+			this.lossesCount++;
+			this.guessedBandImageUrl = this.gameImageUrl;
+			this.guessedBandSong = '';
 			this.start(bands);
 		}
 
@@ -177,6 +188,7 @@ var game = {
 	draw:function() {
 		$('#currentWord').text(this.currentWord);
 		$('#winCount').text(this.winCount);
+		$('#lossesCount').text(this.lossesCount);
 		$('#guessCount').text(this.guessCount);
 		$('#remainingCount').text(this.remainingCount);
 		this.drawCurrentWord();
